@@ -45,6 +45,7 @@ def print_welcome():
 def log_agent_step(step_type: str, data: dict):
     """Callback function to output agent internals visually."""
     if step_type == "assistant_thoughts":
+        return
         # Extract and print thought text block
         text_blocks = [block["text"] for block in data["content"] if block["type"] == "text"]
         if text_blocks and text_blocks[0].strip():

@@ -150,7 +150,7 @@ class SupportAgentOrchestrator:
                     tool_results_blocks.append({
                         "type": "tool_result",
                         "tool_use_id": tool_id,
-                        "content": str(result)  # Feed result back as a string representation
+                        "content": result  # Feed result back as a string representation
                     })
                 
                 # Append the tool execution results back to messages to continue the loop

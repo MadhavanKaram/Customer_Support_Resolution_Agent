@@ -110,7 +110,7 @@ class MockMessages:
                     if isinstance(res_content, dict) and res_content.get("is_verified") is True:
                         get_customer_verified = True
                         
-        print(f"DEBUG SUMMARY: get_customer_calls={get_customer_calls}, get_customer_verified={get_customer_verified}, lookup_order_calls={lookup_order_calls}, process_refund_calls={process_refund_calls}, escalation_calls={escalation_calls}")
+        #print(f"DEBUG SUMMARY: get_customer_calls={get_customer_calls}, get_customer_verified={get_customer_verified}, lookup_order_calls={lookup_order_calls}, process_refund_calls={process_refund_calls}, escalation_calls={escalation_calls}")
         # Let's get the last user text input (excluding tool results)
         last_user_text = ""
         for role, text in reversed(history):
@@ -233,9 +233,33 @@ class MockMessages:
             elif get_customer_verified and lookup_order_calls == 0 and escalation_calls == 0:
                 # Customer verified. Now we must disambiguate the 3 water heaters!
                 # Check if the user has already selected which water heater they want (AquaFlow, ThermosMax, HeatWave)
-                wants_aquaflow = "aquaflow" in last_user_text or "first" in last_user_text or "may 20" in last_user_text or "newest" in last_user_text or "recent" in last_user_text
-                wants_thermosmax = "thermosmax" in last_user_text or "second" in last_user_text or "dec 10" in last_user_text or "holiday" in last_user_text
-                wants_heatwave = "heatwave" in last_user_text or "third" in last_user_text or "june 1" in last_user_text or "oldest" in last_user_text or "2024" in last_user_text
+                selection = last_user_text.strip()
+
+                wants_aquaflow = (
+                    selection == "1"
+                    or "aquaflow" in last_user_text
+                    or "first" in last_user_text
+                    or "may 20" in last_user_text
+                    or "newest" in last_user_text
+                    or "recent" in last_user_text
+                )
+
+                wants_thermosmax = (
+                    selection == "2"
+                    or "thermosmax" in last_user_text
+                    or "second" in last_user_text
+                    or "dec 10" in last_user_text
+                    or "holiday" in last_user_text
+                )
+
+                wants_heatwave = (
+                    selection == "3"
+                    or "heatwave" in last_user_text
+                    or "third" in last_user_text
+                    or "june 1" in last_user_text
+                    or "oldest" in last_user_text
+                    or "2024" in last_user_text
+)
                 
                 if not (wants_aquaflow or wants_thermosmax or wants_heatwave):
                     return MockMessage(
@@ -328,10 +352,17 @@ class MockMessages:
                     
             elif is_escalated:
                 # Escalation result response
-                t_id = "TCKT-XXXX"
-                if isinstance(last_tool_result_content, dict):
+                import re
+
+                t_id = "TCKT-MOCK"
+
+                if isinstance(last_tool_result_content, str):
+                    match = re.search(r"'ticket_id':\s*'([^']+)'", last_tool_result_content)
+                    if match:
+                        t_id = match.group(1)
+                elif isinstance(last_tool_result_content, dict):
                     t_id = last_tool_result_content.get("ticket_id", "TCKT-MOCK")
-                return MockMessage(
+                    return MockMessage(
                     content=[
                         MockContentBlock("text", f"I have successfully escalated your request to our support team. Your ticket ID is {t_id}. A representative will review the details and get back to you shortly.")
                     ],
@@ -383,10 +414,17 @@ class MockMessages:
                 )
             elif is_escalated:
                 # Turn 5: Escaled because refund limit exceeded
-                t_id = "TCKT-XXXX"
-                if isinstance(last_tool_result_content, dict):
-                    t_id = last_tool_result_content.get("ticket_id", "TCKT-MOCK")
-                return MockMessage(
+                import re
+
+                t_id = "TCKT-MOCK"
+
+                if isinstance(last_tool_result_content, str):
+                        match = re.search(r"'ticket_id':\s*'([^']+)'", last_tool_result_content)
+                        if match:
+                            t_id = match.group(1)
+                elif isinstance(last_tool_result_content, dict):
+                        t_id = last_tool_result_content.get("ticket_id", "TCKT-MOCK")
+                        return MockMessage(
                     content=[
                         MockContentBlock("text", f"Your refund request for the $1,200.00 laptop (Order ID: ORD-301) has been escalated to a human agent because the amount exceeds our automatic approval limit. Ticket ID: {t_id}. A team member will assist you shortly.")
                     ],
