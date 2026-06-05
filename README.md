@@ -238,6 +238,6 @@ The system successfully satisfies all project requirements including agentic too
 ![Laptop Refund](Screenshots/Laptop_refund_1.png)
 ![Laptop Refund](Screenshots/Laptop_refund_2.png)
 
-### Transient Error Recovery
+### Toaster Refund
 
 ![Toaster Refund](Screenshots/Toaster_Refund.png)
