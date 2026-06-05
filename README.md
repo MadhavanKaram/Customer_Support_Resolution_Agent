@@ -226,18 +226,18 @@ The system successfully satisfies all project requirements including agentic too
 
 ### Blender Refund Flow
 
-![Blender Refund](Screenshots/blender_refund.png)
+![Blender Refund](screenshots/blender_refund.png)
 
 ### Water Heater Disambiguation
 
-![Water Heater](Screenshots/water_heater_1.png)
-![Water Heater](Screenshots/water_heater_2.png)
+![Water Heater](screenshots/water_heater_1.png)
+![Water Heater](screenshots/water_heater_2.png)
 
 ### Laptop Refund
 
-![Laptop Refund](Screenshots/Laptop_refund_1.png)
-![Laptop Refund](Screenshots/Laptop_refund_2.png)
+![Laptop Refund](screenshots/Laptop_refund_1.png)
+![Laptop Refund](screenshots/Laptop_refund_2.png)
 
 ### Toaster Refund
 
-![Toaster Refund](Screenshots/Toaster_Refund.png)
+![Toaster Refund](screenshots/Toaster_Refund.png)
