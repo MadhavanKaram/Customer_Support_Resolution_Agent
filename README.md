@@ -1,8 +1,8 @@
-# Customer Support Resolution Agent
-
 > Project developed as part of the BusinessLabs.org Assessment Program.
 >
 > **Candidate ID:** 2026-2424
+
+# Customer Support Resolution Agent
 ## Overview
 
 The Customer Support Resolution Agent is an AI-powered customer service system built using Python and the Claude API architecture. The agent can autonomously resolve common customer support requests such as order lookups, refund requests, and return inquiries while enforcing strict safety policies.
