@@ -1,6 +1,5 @@
-> Project developed as part of the BusinessLabs.org Assessment Program.
->
-> **Candidate ID:** 2026-2424
+Project made for assessment for BusinessLabs.org
+My id is 2026-2424
 
 # Customer Support Resolution Agent
 ## Overview
